@@ -1,0 +1,51 @@
+services:
+    azurite:
+        image: mcr.microsoft.com/azure-storage/azurite:latest
+        container_name: azurite
+        restart: always
+        # azurite has entrypoint = "docker-entrypoint.sh" with a cmd = ["azurite", ...]
+        # We've overridden command to disable telemetry and go slient because of the noise that it produces.
+        command: ["azurite", "-l", "/data", "--tableHost", "0.0.0.0", "--disableTelemetry", "--silent"]
+
+    bankserver1:
+        image: ${ANTITHESIS_REGISTRY}/orleans-bank-test/bankserver:latest
+        build:
+            dockerfile: Dockerfile.server
+        container_name: bankserver1
+        restart: always
+        depends_on:
+            - azurite
+
+    bankserver2:
+        image: ${ANTITHESIS_REGISTRY}/orleans-bank-test/bankserver:latest
+        container_name: bankserver2
+        restart: always
+        depends_on:
+            - azurite
+
+    bankclient:
+        image: ${ANTITHESIS_REGISTRY}/orleans-bank-test/bankclient:latest
+        build:
+            dockerfile: Dockerfile.client
+        container_name: bankclient
+        restart: always
+        depends_on:
+            - bankserver1
+            - bankserver2
+
+    bankwatchdog:
+        image: ${ANTITHESIS_REGISTRY}/orleans-bank-test/bankwatchdog:latest
+        build:
+            dockerfile: Dockerfile.watchdog
+        container_name: bankwatchdog
+        restart: always
+        depends_on:
+            - bankserver1
+            - bankserver2
+
+    config:
+        image: ${ANTITHESIS_REGISTRY}/orleans-bank-test/config:latest
+        build:
+            dockerfile: Dockerfile.config
+        profiles:
+            - config

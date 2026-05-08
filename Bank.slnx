@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+  </Folder>
+  <Project Path="Bank.Client/Bank.Client.csproj" />
+  <Project Path="Bank.Grains/Bank.Grains.csproj" />
+  <Project Path="Bank.Interfaces/Bank.Interfaces.csproj" />
+  <Project Path="Bank.Server/Bank.Server.csproj" />
+</Solution>

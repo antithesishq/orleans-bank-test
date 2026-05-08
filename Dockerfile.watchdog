@@ -1,0 +1,20 @@
+###### Stage 1 of 2 - Build
+
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+WORKDIR /app
+COPY . ./
+RUN dotnet restore Bank.Client/Bank.Client.csproj
+RUN dotnet build Bank.Client/Bank.Client.csproj --configuration Release --no-restore
+RUN dotnet publish Bank.Client/Bank.Client.csproj --configuration Release --no-build -o out
+
+##### Stage 2 of 2 - Production Image
+
+FROM mcr.microsoft.com/dotnet/runtime:10.0
+WORKDIR /app
+COPY --from=build /app/out .
+
+# Install curl so that we can issue requests to Bank.Client/TableDumper @ http://localhost:#####.
+RUN apt-get update && apt-get install -y curl
+
+ENTRYPOINT ["dotnet", "Bank.Client.dll"]
+CMD ["BankClientOptions:Mode=Watchdog"]

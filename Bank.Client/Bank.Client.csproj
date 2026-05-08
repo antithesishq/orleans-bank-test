@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Antithesis.SDK"/>
+        <PackageReference Include="Microsoft.Extensions.Hosting"/>
+        <PackageReference Include="Microsoft.Extensions.Logging.Console"/>
+        <PackageReference Include="Microsoft.Orleans.Client"/>
+        <PackageReference Include="Microsoft.Orleans.Clustering.AzureStorage" />
+        <PackageReference Include="Microsoft.Orleans.Transactions"/>
+        <PackageReference Include="Polly.Core" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="../Bank.Interfaces/Bank.Interfaces.csproj"/>
+    </ItemGroup>
+</Project>

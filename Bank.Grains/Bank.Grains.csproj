@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <ItemGroup>
+        <PackageReference Include="Antithesis.SDK"/>
+        <PackageReference Include="Microsoft.Orleans.Sdk"/>
+        <PackageReference Include="Microsoft.Orleans.Transactions"/>
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="../Bank.Interfaces/Bank.Interfaces.csproj"/>
+    </ItemGroup>
+</Project>
