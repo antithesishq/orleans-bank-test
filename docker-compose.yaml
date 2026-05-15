@@ -33,16 +33,6 @@ services:
             - bankserver1
             - bankserver2
 
-    bankwatchdog:
-        image: ${ANTITHESIS_REGISTRY}/orleans-bank-test/bankwatchdog:latest
-        build:
-            dockerfile: Dockerfile.watchdog
-        container_name: bankwatchdog
-        restart: always
-        depends_on:
-            - bankserver1
-            - bankserver2
-
     config:
         image: ${ANTITHESIS_REGISTRY}/orleans-bank-test/config:latest
         build:
