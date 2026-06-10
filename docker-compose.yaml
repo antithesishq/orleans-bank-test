@@ -8,7 +8,7 @@ services:
         command: ["azurite", "-l", "/data", "--tableHost", "0.0.0.0", "--disableTelemetry", "--silent"]
 
     bankserver1:
-        image: ${ANTITHESIS_REGISTRY}/orleans-bank-test/bankserver:latest
+        image: ${ANTITHESIS_REGISTRY}/orleans-bank-test/bankserver:${TAG}
         build:
             dockerfile: Dockerfile.server
         container_name: bankserver1
@@ -17,14 +17,14 @@ services:
             - azurite
 
     bankserver2:
-        image: ${ANTITHESIS_REGISTRY}/orleans-bank-test/bankserver:latest
+        image: ${ANTITHESIS_REGISTRY}/orleans-bank-test/bankserver:${TAG}
         container_name: bankserver2
         restart: always
         depends_on:
             - azurite
 
     bankclient:
-        image: ${ANTITHESIS_REGISTRY}/orleans-bank-test/bankclient:latest
+        image: ${ANTITHESIS_REGISTRY}/orleans-bank-test/bankclient:${TAG}
         build:
             dockerfile: Dockerfile.client
         container_name: bankclient
@@ -34,7 +34,7 @@ services:
             - bankserver2
 
     config:
-        image: ${ANTITHESIS_REGISTRY}/orleans-bank-test/config:latest
+        image: ${ANTITHESIS_REGISTRY}/orleans-bank-test/config:${TAG}
         build:
             dockerfile: Dockerfile.config
         profiles:
