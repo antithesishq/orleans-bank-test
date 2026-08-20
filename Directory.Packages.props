@@ -1,12 +1,14 @@
 <Project>
     <PropertyGroup>
         <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
-        <OrleansVersion>10.1.0</OrleansVersion>
+        <DotnetVersion>10.0.11</DotnetVersion>
+        <!-- Manually update the .env file's TAG variable when changing OrleansVersion here. -->
+        <OrleansVersion>10.2.2</OrleansVersion>
     </PropertyGroup>
     <ItemGroup>
         <PackageVersion Include="Antithesis.SDK" Version="2.0.4" />
-        <PackageVersion Include="Microsoft.Extensions.Hosting" Version="10.0.7" />
-        <PackageVersion Include="Microsoft.Extensions.Logging.Console" Version="10.0.7" />
+        <PackageVersion Include="Microsoft.Extensions.Hosting" Version="$(DotnetVersion)" />
+        <PackageVersion Include="Microsoft.Extensions.Logging.Console" Version="$(DotnetVersion)" />
         <PackageVersion Include="Microsoft.Orleans.Client" Version="$(OrleansVersion)" />
         <PackageVersion Include="Microsoft.Orleans.Clustering.AzureStorage" Version="$(OrleansVersion)" />
         <PackageVersion Include="Microsoft.Orleans.Persistence.AzureStorage" Version="$(OrleansVersion)" />
@@ -14,6 +16,6 @@
         <PackageVersion Include="Microsoft.Orleans.Server" Version="$(OrleansVersion)" />
         <PackageVersion Include="Microsoft.Orleans.Transactions" Version="$(OrleansVersion)" />
         <PackageVersion Include="Microsoft.Orleans.Transactions.AzureStorage" Version="$(OrleansVersion)" />
-        <PackageVersion Include="Polly.Core" Version="8.6.6" />
+        <PackageVersion Include="Polly.Core" Version="8.7.0" />
     </ItemGroup>
 </Project>
